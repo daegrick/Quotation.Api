@@ -25,6 +25,8 @@ namespace Quotation.Persistence.Database
             return new NpgsqlConnection(builder.ConnectionString);
         }
 
-        public async Task<int> Save(string query, DynamicParameters parameters) => await GetConnection().ExecuteAsync(query, parameters);
+        public async Task<T> Get<T>(SelectBuilder select) where T : class, new() => await GetConnection().QuerySingleOrDefaultAsync<T>(select.ToString(), select.Parameters) ?? new();
+
+        public async Task<int> Save(UpsertBuilder upsert) => await GetConnection().ExecuteAsync(upsert.ToString(), upsert.Parameters);
     }
 }

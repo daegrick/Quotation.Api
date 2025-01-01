@@ -9,14 +9,14 @@ namespace Quotation.Persistence.Repository
     {
         public async Task<Company> Get(Guid uid)
         {
-            db.GetConnection().Open();
-            var select = new SelectBuilder()
-                .Select()
-                .AllFields()
-                .AddFrom(table: nameof(Company))
-                .AddWhere()
-                .AddValue(nameof(Company.Uid), uid);
-            return await db.GetConnection().QuerySingleAsync<Company>(select.ToString(), select.Parameters) ?? new Company();
+                db.GetConnection().Open();
+                var select = new SelectBuilder()
+                    .Select()
+                    .AllFields()
+                    .AddFrom(table: nameof(Company))
+                    .AddWhere()
+                    .AddValue(nameof(Company.Uid), uid);
+            return await db.Get<Company>(select);
         }
 
         public async Task<int> Save(Company company)
@@ -27,7 +27,7 @@ namespace Quotation.Persistence.Repository
                 .InsertField(nameof(Company.Name), company.Name)
                 .InsertField(nameof(company.LastModified), company.LastModified ?? default)
                 .InsertField(nameof(company.Status), company.Status);
-            return await db.Save(upsert.ToString(), upsert.Parameters);
+            return await db.Save(upsert);
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Quotation.Persistence.Database
 {
-    internal class SelectBuilder
+    public class SelectBuilder
     {
         private readonly StringBuilder _query = new StringBuilder();
         public readonly DynamicParameters Parameters = new DynamicParameters();

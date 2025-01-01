@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Quotation.Persistence.Database
 {
-    internal class UpsertBuilder(string tableName, string[] primaryKeys)
+    public class UpsertBuilder(string tableName, string[] primaryKeys)
     {
         private readonly StringBuilder _insertHeader = new StringBuilder();
         private readonly StringBuilder _insertBody = new StringBuilder();
