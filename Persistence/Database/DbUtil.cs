@@ -9,6 +9,7 @@ namespace Quotation.Persistence.Database
 
         public DbUtil()
         {
+            DefaultTypeMap.MatchNamesWithUnderscores = true;
             Connection = GetConnection();
         }
 
